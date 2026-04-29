@@ -1,0 +1,30 @@
+import type { ComponentProps } from "react"
+import { CustomedInput } from "./CustomedInput"
+
+interface SliderProps extends Omit<ComponentProps<"input">, "onChange"> {
+	label?: string;
+	min?: number;
+	max?: number;
+	value: number;
+	onChange?: (value: number) => void;
+}
+
+export const CustomedSlider = ({label, min = 0, max = 100, value, onChange, className, ...props}: SliderProps) => {
+	return (
+		<div>
+			
+			<CustomedInput
+				label={label}
+				type="range"
+				min={min}
+				max={max}
+				step={1}
+				value={value}
+				onChange={e => onChange?.(Number(e.target.value))}
+				className={`accent-green-400 ${className || ""}`}
+				// style={{ accentColor: "#22c55e"}}
+				{...props}
+			/>
+		</div>
+	);
+};
